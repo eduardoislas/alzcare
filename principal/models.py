@@ -20,9 +20,9 @@ class InstrumentApplication(models.Model):
         return cadena.format(self.period, self.year)
 
 class Instrument(models.Model):
-    instructions = models.CharField(max_length=80)
     name = models.CharField(max_length=80)
     indicator = models.CharField(max_length=80)
+    instructions = models.CharField(max_length=350)
     STATUS_INS=(('A','Activo'),('I','Inactivo'))
     status = models.CharField(max_length=1, choices= STATUS_INS, default='A')
     maxValue = models.SmallIntegerField()
@@ -38,9 +38,21 @@ class Instrument(models.Model):
         cadena = "Escala {0} para medir {1}"
         return cadena.format(self.name, self.indicator)
 
+class Scale(models.Model):
+    description = models.CharField(max_length=150)
+
+    class Meta:
+        verbose_name = "Escala de Respuestas"
+        verbose_name_plural = "Escalas de Respuestas"
+
+    def __str__(self):
+        cadena = "Escala {0}"
+        return cadena.format(self.description)
+
 class Option(models.Model):
     description = models.CharField(max_length=80)
     value = models.SmallIntegerField()
+    scale = models.ForeignKey(Scale, null=False, blank = False , on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = "Opción"
@@ -53,8 +65,8 @@ class Option(models.Model):
 class Question(models.Model):
     instrument = models.ForeignKey(Instrument, null=False, blank = False , on_delete=models.CASCADE)
     item = models.SmallIntegerField()
-    description = models.CharField(max_length=120)
-    options = models.ManyToManyField(Option)
+    description = models.CharField(max_length=150)
+    scale = models.ForeignKey(Scale, null=True, blank = True , on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = "Pregunta"
@@ -92,3 +104,4 @@ class Answer(models.Model):
     def __str__(self):
         cadena = "Se respondió {0} a la pregunta {1} del instrumento {2}"
         return cadena.format(self.option.value, self.question.item, self.question.instrument.name) 
+
