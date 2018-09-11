@@ -117,7 +117,6 @@ class Interview(models.Model):
 Modelos utilizados en la creación dinámica de instrumentos, así como su aplicación y guardar resultados.
 """
 class InstrumentApplication(models.Model):
-    # caregiver = models.ForeignKey(Caregiver, null= False, blank = False, on_delete=models.CASCADE)
     period = models.SmallIntegerField()
     year = models.CharField(max_length=4)
     STATUS_APP=(('A','Activa'),('I','Inactiva'))
@@ -194,6 +193,7 @@ class Question(models.Model):
 class InstrumentResult(models.Model):
     instrument = models.ForeignKey(Instrument, null=False, blank = False , on_delete=models.CASCADE)
     iapplication = models.ForeignKey(InstrumentApplication, null=False, blank = False , on_delete=models.CASCADE)
+    caregiver = models.ForeignKey(Caregiver, null= False, blank = False, on_delete=models.CASCADE)
     score = models.SmallIntegerField()
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación")
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")
