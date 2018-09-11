@@ -1,6 +1,121 @@
 from django.db import models
 
 # Create your models here.
+
+
+""" 
+Modelos utilizados en la entrevista inicial.
+"""
+class Adult(models.Model):
+    name = models.CharField(max_length=60, verbose_name="Nombre(s)")
+    lastName = models.CharField(max_length=60, verbose_name="Apellido Paterno")
+    mLastName = models.CharField(max_length=60, verbose_name="Apellido Materno")
+    birthDate = models.DateField(verbose_name="Fecha de nacimiento")
+    CIVIL_STATUS=(('C','Casado(a)'),('D','Divorciado(a)'),('V','Viudo(a)'),('S','Soltero(a)'),('U','Unión Libre'))
+    civilStatus = models.CharField(max_length=1, choices = CIVIL_STATUS, default='C')
+    SEXOS=(('F','Femenino'),('M','Masculino'))
+    phase = models.SmallIntegerField(verbose_name="Fase")
+    gender=models.CharField(max_length=1, choices=SEXOS, default ='F', verbose_name="Género")
+    nacionality = models.CharField(max_length=60, verbose_name="Nacionalidad")
+    religion = models.CharField(max_length=60, verbose_name="Religión")
+    birthPlace = models.CharField(max_length=60, verbose_name="Lugar de nacimiento")
+    STATUS_AD=(('A','Activo'),('B','Baja'), ('F','Finado'))
+    status = models.CharField(max_length=1, choices= STATUS_AD, default='A')
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación")
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")
+
+    class Meta:
+        verbose_name = "Adulto"
+        verbose_name_plural = "Adultos"
+        ordering = ["-created"]
+
+    def __str__(self):
+        cadena = "{1} {2}, {0}"
+        return cadena.format(self.name, self.lastName, self.mLastName)
+
+
+class Caregiver(models.Model):
+    adult = models.ForeignKey(Adult, null=False, blank = False ,verbose_name="Adulto", on_delete=models.CASCADE)
+    name = models.CharField(max_length=60, verbose_name="Nombre(s)")
+    lastName = models.CharField(max_length=60, verbose_name="Apellido Paterno")
+    mLastName = models.CharField(max_length=60, verbose_name="Apellido Materno")
+    RELATION = (('E','Esposo(a)'),('H','Hijo(a)'),('A','Amigo(a)'),('F','Familiar'))
+    relationship = models.CharField(max_length=1, choices = RELATION , default = 'E',verbose_name="Parentesco")
+    email = models.CharField(max_length=100, verbose_name="Correo electrónico")
+    phone = models.CharField(max_length=20, verbose_name="Teléfono/Celular")
+    address = models.CharField(max_length=80, verbose_name="Domicilio")
+    CIVIL_STATUS=(('C','Casado(a)'),('D','Divorciado(a)'),('V','Viudo(a)'),('S','Soltero(a)'),('U','Unión Libre'))
+    civilStatus = models.CharField(max_length=1, choices = CIVIL_STATUS, default='S')
+    SEXOS=(('F','Femenino'),('M','Masculino'))
+    gender=models.CharField(max_length=1, choices=SEXOS, default ='F', verbose_name="Género")
+    religion = models.CharField(max_length=40, verbose_name="Religión")
+    ocupation = models.CharField(max_length=60, verbose_name="Ocupación")
+    availability = models.TextField(verbose_name="Tiempo disponible para tratar asuntos relacionados al cuidado del adulto", null=True, blank=True)
+    availabilityHome = models.TextField(verbose_name="Tiempo disponible para atención del adulto en casa", null=True, blank=True)
+    reason = models.TextField(verbose_name="Razón por la que es el cuidador principal", null=True, blank=True)
+    STATUS_CG=(('A','Activo'),('I','Inactivo'))
+    status = models.CharField(max_length=1, choices= STATUS_CG, default='A')
+    #user = models.OneToOneField(User, unique=True, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación")
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")
+
+    class Meta:
+        verbose_name = "Cuidador"
+        verbose_name_plural = "Cuidadores"
+        ordering = ["-created"]
+
+    def __str__(self):
+        cadena = "{1} {2}, {0}"
+        return cadena.format(self.name, self.lastName, self.mLastName)
+
+class Tutor(models.Model):
+    adult = models.ForeignKey(Adult, null=False, blank = False ,verbose_name="Adulto", on_delete=models.CASCADE)
+    name = models.CharField(max_length=60, verbose_name="Nombre(s)")
+    lastName = models.CharField(max_length=60, verbose_name="Apellido Paterno")
+    mLastName = models.CharField(max_length=60, verbose_name="Apellido Materno")
+    RELATION = (('E','Esposo(a)'),('H','Hijo(a)'),('A','Amigo(a)'),('F','Familiar'))
+    relationship = models.CharField(max_length=1, choices = RELATION , default = 'E',verbose_name="Parentesco")
+    email = models.CharField(max_length=100, verbose_name="Correo electrónico")
+    phone = models.CharField(max_length=20, verbose_name="Teléfono/Celular")
+    address = models.CharField(max_length=80, verbose_name="Domicilio")
+    SEXOS=(('F','Femenino'),('M','Masculino'))
+    gender=models.CharField(max_length=1, choices=SEXOS, default ='F', verbose_name="Género")
+    reason = models.TextField(verbose_name="Razón por la que es el Tutor", null=True, blank=True)
+    knowledge = models.BooleanField(verbose_name="¿Conoce responsabilidades morales y legales que se asumen como tutor?")
+    observation = models.TextField(verbose_name="Observaciones")
+    STATUS_CG=(('A','Activo'),('I','Inactivo'))
+    status = models.CharField(max_length=1, choices= STATUS_CG, default='A')
+    #user = models.OneToOneField(User, unique=True, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación")
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")
+
+    class Meta:
+        verbose_name = "Tutor"
+        verbose_name_plural = "Tutores"
+        ordering = ["-created"]
+
+    def __str__(self):
+        cadena = "{1} {2}, {0}"
+        return cadena.format(self.name, self.lastName, self.mLastName)
+
+class Interview(models.Model):
+    adult = models.OneToOneField(Adult, unique=True, on_delete=models.CASCADE)
+    q1 = models.CharField(max_length=60, verbose_name="Prueba aún....")
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación")
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")
+
+    class Meta:
+        verbose_name = "Entrevista inicial"
+        verbose_name_plural = "Entrevistas iniciales"
+        ordering = ["-created"]
+
+    def __str__(self):
+        cadena = "Entrevista incial correspondiente a {0}"
+        return cadena.format(self.adult)
+
+""" 
+Modelos utilizados en la creación dinámica de instrumentos, así como su aplicación y guardar resultados.
+"""
 class InstrumentApplication(models.Model):
     # caregiver = models.ForeignKey(Caregiver, null= False, blank = False, on_delete=models.CASCADE)
     period = models.SmallIntegerField()
