@@ -205,7 +205,7 @@ table.dataTable {
     background-color: #f5f5f5;
     margin: 2%;
     border-radius: 3px;
-    border-top: solid 3px #d5b147;
+    border-top: solid 3px #7B3072;
     padding: 5px 10px;
     float: left;
     width: 96%;
@@ -222,7 +222,7 @@ table.dataTable {
 
 h3.modal-title {
     font-weight: bold;
-    color: #76b852;
+    color: #7b3072;
 }
 
 input[type="file"] {
@@ -235,11 +235,11 @@ input[type="file"] {
 
 .content-header > h1 {
     font-weight: bold;
-    color: #76b852;
+    color: #7b3072;
 }
 
 .selectedRow, .selectedRowDia, .selected, .selectedSesion {
-    background-color: #76b852 !important;
+    background-color: #7b3072 !important;
 }
 
     .selectedRow:hover, .selectedRowDia:hover, .selected:hover {
