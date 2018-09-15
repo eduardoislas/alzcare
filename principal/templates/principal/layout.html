@@ -4,7 +4,7 @@
     <meta charset='utf-8' />
     <meta name="viewport" content="width=device-width" />
     
-    <title>{%block title %}{% endblock %}</title>
+    <title>{% block title %}{% endblock %}</title>
     {% load static %}
     <link rel="shortcut icon" href="{% static 'principal/img/brain-head.png' %}" />
     <link rel="stylesheet" href="{% static 'principal/css/alzcare-1.2.css' %}" />
@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{% static 'principal/css/AdminLTE.css' %}" />
     <link rel="stylesheet" href="{% static 'principal/css/font-awesome.css' %} " />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-    {% block styles %}{%endblock%}
+    {% block styles %}{% endblock %}
 
 
 </head>
@@ -97,11 +97,11 @@
         </aside>
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-            {% block content %}{%endblock%}
+            {% block content %}{% endblock %}
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong>Copyright &copy; Alcare 2018.</strong> 
+            <strong>Copyright &copy; Alzcare 2018.</strong> 
         </footer>
     </div>
 
@@ -109,7 +109,7 @@
     <script type="text/javascript" src="{% static 'principal/js/jquery.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'principal/js/bootstrap.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'principal/js/app.min.js' %}"></script>
-    {% block scripts %}{%endblock%}
+    {% block scripts %}{% endblock %}
     <div id="lockscreen">
         <div class="loader"></div>
     </div>
