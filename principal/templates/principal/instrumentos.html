@@ -32,7 +32,7 @@
                             <form action="/instrumento/" method="POST">
                               {% csrf_token %}
                               <input type="hidden" name="instrumento" value="{{instrument.id}}"/>
-                              <button type="submit" value="Contestar">Contestar</button>
+                              <button class="btn btn-basic" type="submit" value="Contestar">Contestar</button>
                             </form>
                         </td>
                 </tr>

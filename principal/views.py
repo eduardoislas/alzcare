@@ -14,7 +14,11 @@ def instrumento (request):
     id = int(request.POST.get('instrumento'))
     instrument = Instrument.objects.get(pk=id)
     questions = Question.objects.filter(instrument_id=id)
-    return render(request,"principal/instrument.html",{'instrument':instrument, 'questions':questions})
+    for q in questions:
+        idScale = q.scale_id
+        break
+    options = Option.objects.filter(scale_id=idScale)
+    return render(request,"principal/instrument.html",{'instrument':instrument, 'questions':questions, 'options':options})
     
 def login (request):
     return render(request,"principal/login.html") 
