@@ -140,6 +140,8 @@ class Instrument(models.Model):
     STATUS_INS=(('A','Activo'),('I','Inactivo'))
     status = models.CharField(max_length=1, choices= STATUS_INS, default='A')
     maxValue = models.SmallIntegerField()
+    STYLE_OPTION=((1,'Misma escala'),('2','Escala por pregunta'))
+    style = models.SmallIntegerField(choices= STYLE_OPTION, default=1, verbose_name="Tipo de cuestionario")
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación")
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")
 

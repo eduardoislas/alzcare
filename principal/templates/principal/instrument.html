@@ -9,11 +9,11 @@
         <section class="content-header">
                 <h1>{{instrument.name}}</h1>
             </section>
-
     <div class="box">
         <div class="box-header">
           <h3 class="box-title">{{ instrument.instructions}} </h3>
         </div>
+        {{scales}}
         <!-- /.box-header -->
         <div class="box-body no-padding">
           <table class="table table-condensed">
@@ -22,6 +22,7 @@
                 <th>Pregunta</th>
                 <th>Seleccione su respuesta</th>
             </tr>
+            {% if instrument.style == 1%}
             {% for question in questions %}
                 <tr>
                     <td>{{question.item}}</td>
@@ -37,6 +38,27 @@
                     </td>
                 </tr>
             {% endfor %}
+            {% endif %}
+
+            {% if instrument.style == 2%}
+            {% for question in questions %}
+                <tr>
+                    <td>{{question.item}}</td>
+                    <td>{{question.description}}</td>
+                    <td>
+                        <div class="form-group">
+                        <select class="form-control" id="respuesta">
+                        {% for option in options %}
+                            {% if question.scale_id == option.scale_id %}
+                                    <option>{{option.description}}</option>
+                            {% endif %}
+                        {% endfor %}
+                        </select>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            {% endif %}
           </table>
         </div>
         <!-- /.box-body -->
