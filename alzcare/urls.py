@@ -17,13 +17,14 @@ from django.contrib import admin
 from django.urls import path,include
 from principal import views
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.decorators import login_required
+
 urlpatterns = [
       path('', auth_views.LoginView.as_view(template_name='registration/login.html')),
     path('admin/', admin.site.urls),
-    path('home/', views.home, name="home"),
-    path('login/', views.login, name="login"),
-    path('instrumentos/',views.instrumentos, name = "instrumentos"),
-    path('instrumento/',views.instrumento, name = "instrumento"),
+    path('home/', login_required(views.home), name="home"),
+    path('instrumentos/',login_required(views.instrumentos), name = "instrumentos"),
+    path('instrumento/',login_required(views.instrumento), name = "instrumento"),
   # paths de auth
 path('accounts/', include('django.contrib.auth.urls')),
 ]
