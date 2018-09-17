@@ -1,10 +1,12 @@
 {% extends 'principal/layout.html' %}
 {% load static %}
-{% block title %}Instrumentos{% endblock %}
+{% block title %}{{instrument.name}}{% endblock %}
 {% block styles %}{% endblock %}
 {% block scripts %}{% endblock %}
 
 {% block content %}
+<form action="/instrumentos/" method="POST">
+{% csrf_token %}
 <div class="card-cv">
         <section class="content-header">
                 <h1>{{instrument.name}}</h1>
@@ -13,7 +15,6 @@
         <div class="box-header">
           <h3 class="box-title">{{ instrument.instructions}} </h3>
         </div>
-        {{scales}}
         <!-- /.box-header -->
         <div class="box-body no-padding">
           <table class="table table-condensed">
@@ -63,6 +64,11 @@
         </div>
         <!-- /.box-body -->
       </div>
+    <div class="pull-right">
+        <button class="btn btn-primary btn-lg" type="submit" value="Guardar">Guardar</button>
+    </div>
 </div>
+
+</form>
 
 {% endblock %}
