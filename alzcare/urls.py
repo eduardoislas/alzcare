@@ -23,7 +23,6 @@ urlpatterns = [
       path('', auth_views.LoginView.as_view(template_name='registration/login.html')),
     path('admin/', admin.site.urls),
     path('home/', login_required(views.home), name="home"),
-    path('login/', login_required(views.login), name="login"),
     path('instrumentos/',login_required(views.instrumentos), name = "instrumentos"),
     path('instrumento/',login_required(views.instrumento), name = "instrumento"),
   # paths de auth
