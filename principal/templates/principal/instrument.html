@@ -30,9 +30,9 @@
                     <td>{{question.description}}</td>
                     <td>
                         <div class="form-group">
-                        <select class="form-control" id="respuesta">
+                        <select class="form-control" id="respuesta" name="respuestas">
                         {% for option in options %}
-                            <option>{{option.description}}</option>
+                            <option name="resp" value={{ option.id }}>{{option.description}}</option>
                         {% endfor %}
                         </select>
                         </div>
@@ -48,10 +48,10 @@
                     <td>{{question.description}}</td>
                     <td>
                         <div class="form-group">
-                        <select class="form-control" id="respuesta">
+                        <select class="form-control" id="respuesta" name="respuestas">
                         {% for option in options %}
                             {% if question.scale_id == option.scale_id %}
-                                    <option>{{option.description}}</option>
+                                    <option value={{ option.id }}>{{option.description}}</option>
                             {% endif %}
                         {% endfor %}
                         </select>
@@ -68,7 +68,6 @@
         <button class="btn btn-primary btn-lg" type="submit" value="Guardar">Guardar</button>
     </div>
 </div>
-
 </form>
 
 {% endblock %}

@@ -18,6 +18,7 @@ from django.urls import path,include
 from principal import views
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
+from principal.views import AdultListView, AdultDetailView, AdultCreate
 
 urlpatterns = [
       path('', auth_views.LoginView.as_view(template_name='registration/login.html')),
@@ -26,5 +27,9 @@ urlpatterns = [
     path('instrumentos/',login_required(views.instrumentos), name = "instrumentos"),
     path('instrumento/',login_required(views.instrumento), name = "instrumento"),
   # paths de auth
-path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+  #CRUD Adultos
+    path('adult/', AdultListView.as_view(), name="adult_list"),
+    path('adult/<int:pk>/', AdultDetailView.as_view(), name="adult_detail"),
+    path('adult_create/', AdultCreate.as_view(success_url="/adult/"), name="adult_create"),
 ]

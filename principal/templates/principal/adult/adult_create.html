@@ -1,0 +1,38 @@
+{% extends 'principal/layout.html' %}
+
+{% block title %}Agregar Adulto{% endblock %}
+
+
+
+{% block background %}{% endblock %}
+
+{% block headers %}
+
+{% endblock %}
+
+{% block content %}
+<div class="card-cv">
+        <section class="content-header">
+                <h1>Agregar Adulto</h1>
+            </section>
+    <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">Complete los campos solicitados</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body no-padding">
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value"Guardar" class="btn btn-success"/>
+        </form>
+          </div>
+        <!-- /.box-body -->
+      </div>
+      <div class="pull-right">
+    <a href="{% url "adult_list" %}" class="btn btn-info">Regresar</a>
+</div>
+</div>
+
+
+{% endblock %}

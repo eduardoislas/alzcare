@@ -1,0 +1,49 @@
+{% extends 'principal/layout.html' %}
+
+{% block title %}Listado de Adultos{% endblock %}
+
+
+
+{% block background %}{% endblock %}
+
+{% block headers %}
+
+{% endblock %}
+
+{% block content %}
+<div class="card-cv">
+        <section class="content-header">
+                <h1>Adultos</h1>
+            </section>
+    <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">Adultos</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body no-padding">
+          <table class="table table-condensed">
+            <tr>
+              <th>Nombre</th>
+              <th>Fase</th>
+              <th>Opciones</th>
+            </tr>
+            {% for adult in object_list %}
+            <tr>
+                        <td>{{adult}}</td>
+                        <td>{{adult.phase}}</td>
+                        <td>
+                            <a href="{% url "adult_detail" adult.id %}" class="btn btn-primary">Ver</a>
+                        </td>
+                </tr>
+
+            {% endfor %}
+          </table>
+          </div>
+        <!-- /.box-body -->
+      </div>
+      <div class="pull-right">
+      <a href="{% url "adult_create" %}" class="btn btn-success">Agregar</a>
+    <a href="{% url "home" %}" class="btn btn-info">Regresar</a>
+</div>
+</div>
+{% endblock %}
