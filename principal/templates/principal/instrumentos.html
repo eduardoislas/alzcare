@@ -19,14 +19,12 @@
           <table class="table table-condensed">
             <tr>
               <th>Nombre</th>
-              <th>Indicador</th>
               <th>Opciones</th>
             </tr>
             {% for instrument in instruments %}
                 <h2></h2> 
                 <tr>
                         <td>{{instrument.name}}</td>
-                        <td>{{instrument.indicator}}</td>
                         <td>
                             <form action="/instrumento/" method="POST">
                               {% csrf_token %}

@@ -48,4 +48,4 @@ class AdultCreate(CreateView):
     model=Adult
     template_name="principal/adult/adult_create.html"
     fields = ['name','lastName','mLastName','birthDate','civilStatus','gender','phase','nacionality','religion',
-    'birthPlace', 'isPrincipal']
+    'birthPlace']

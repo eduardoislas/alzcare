@@ -18,30 +18,35 @@
         <!-- /.box-header -->
         <div class="box-body no-padding">
           <table class="table table-condensed">
+          {% if instrument.style == 1%}
             <tr>
                 <th>Num</th>
                 <th>Pregunta</th>
-                <th>Seleccione su respuesta</th>
+                {% for option in options %}
+                <th>{{option.description}}</th>
+                {% endfor%}
             </tr>
-            {% if instrument.style == 1%}
             {% for question in questions %}
                 <tr>
                     <td>{{question.item}}</td>
                     <td>{{question.description}}</td>
+                    {% for option in options %}
                     <td>
-                        <div class="form-group">
-                        <select class="form-control" id="respuesta" name="respuestas">
-                        {% for option in options %}
-                            <option name="resp" value={{ option.id }}>{{option.description}}</option>
-                        {% endfor %}
-                        </select>
+                        <div class="radio">
+                            <label><input type="radio" name="radio{{question.item}}" value={{option.value}}></label>
                         </div>
                     </td>
+                    {% endfor %}
                 </tr>
             {% endfor %}
             {% endif %}
 
             {% if instrument.style == 2%}
+            <tr>
+                <th>Item</th>
+                <th>Pregunta</th>
+                <th>Opciones</th>
+            </tr>
             {% for question in questions %}
                 <tr>
                     <td>{{question.item}}</td>

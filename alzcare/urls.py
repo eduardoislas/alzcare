@@ -29,7 +29,7 @@ urlpatterns = [
   # paths de auth
     path('accounts/', include('django.contrib.auth.urls')),
   #CRUD Adultos
-    path('adult/', AdultListView.as_view(), name="adult_list"),
-    path('adult/<int:pk>/', AdultDetailView.as_view(), name="adult_detail"),
-    path('adult_create/', AdultCreate.as_view(success_url="/adult/"), name="adult_create"),
+    path('adult/', login_required(AdultListView.as_view()), name="adult_list"),
+    path('adult/<int:pk>/', login_required(AdultDetailView.as_view()), name="adult_detail"),
+    path('adult_create/', login_required(AdultCreate.as_view(success_url="/adult/")), name="adult_create"),
 ]
