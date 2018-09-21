@@ -18,7 +18,7 @@ from django.urls import path,include
 from principal import views
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
-from principal.views import AdultListView, AdultDetailView, AdultCreate
+from principal.views import AdultListView, AdultDetailView, AdultCreate, TutorListView, TutorDetailView, TutorCreate
 
 urlpatterns = [
       path('', auth_views.LoginView.as_view(template_name='registration/login.html')),
@@ -32,4 +32,8 @@ urlpatterns = [
     path('adult/', login_required(AdultListView.as_view()), name="adult_list"),
     path('adult/<int:pk>/', login_required(AdultDetailView.as_view()), name="adult_detail"),
     path('adult_create/', login_required(AdultCreate.as_view(success_url="/adult/")), name="adult_create"),
+
+     path('tutor/', login_required(TutorListView.as_view()), name="tutor_list"),
+    path('tutor/<int:pk>/', login_required(TutorDetailView.as_view()), name="tutor_detail"),
+    path('tutor_create/', login_required(TutorCreate.as_view(success_url="/tutor/")), name="tutor_create"),
 ]
