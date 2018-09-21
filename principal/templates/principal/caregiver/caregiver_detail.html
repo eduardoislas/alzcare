@@ -1,0 +1,61 @@
+{% extends 'principal/layout.html' %}
+
+{% block title %}Detalle Adulto{% endblock %}
+
+
+
+{% block background %}{% endblock %}
+
+{% block headers %}
+Algo
+{% endblock %}
+
+{% block content %}
+<div class="card-cv">
+        <section class="content-header">
+                <h1>{{caregiver}}</h1>
+            </section>
+    <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">Datos personales</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body no-padding">
+          <table class="table table-condensed">
+              <tr>
+              <th>Adulto Asignado</th>
+              <td>{{caregiver.adult}}</td>
+            </tr>
+            <tr>
+              <th>Relación</th>
+              <td>{{caregiver.relationship}}</td>
+             </tr>
+             <tr> 
+                <th>Razon</th>
+              <td>{{caregiver.reason}}</td>
+            </tr>
+            <tr>
+                <th>Género</th>
+              <td>{{caregiver.gender}}</td>
+            </tr>
+            <tr>
+                <th>Telefono</th>
+              <td>{{caregiver.phone}}</td>
+            </tr>
+           
+            <tr>
+                <th>Estatus</th>
+              <td>{{caregiver.status}}</td>
+            </tr>
+           
+          </table>
+          </div>
+        <!-- /.box-body -->
+      </div>
+      <div class="pull-right">
+    <a href="{% url "caregiver_list" %}" class="btn btn-info">Regresar</a>
+</div>
+</div>
+
+
+{% endblock %}

@@ -63,3 +63,17 @@ class TutorCreate(CreateView):
     template_name="principal/tutor/tutor_create.html"
     fields = ['adult','name','lastName','mLastName','relationship','email','phone','address','gender','knowledge','observation','status',
     'reason']
+
+class CaregiverListView(ListView):
+    model=Caregiver
+    template_name="principal/caregiver/caregiver_list.html"
+
+class CaregiverDetailView(DetailView):
+    model=Caregiver
+    template_name="principal/caregiver/caregiver_detail.html"
+
+class CaregiverCreate(CreateView):
+    model=Caregiver
+    template_name="principal/caregiver/caregiver_create.html"
+    fields = ['adult','name','lastName','mLastName','civilStatus','ocupation','relationship','email','phone','address','gender','status','availability','isPrincipal',
+    'reason']
