@@ -10,6 +10,10 @@ from .models import *
 def home (request):
     return render(request,"principal/home.html") 
 
+def login (request):
+    return render(request,"principal/login.html") 
+
+# Gestión de instrumentos
 def instrumentos (request):
     opciones = []
     if request.method == 'POST':
@@ -33,9 +37,7 @@ def instrumento (request):
         options = Option.objects.all()
     return render(request,"principal/instrument.html",{'instrument':instrument, 'questions':questions, 'options':options})
     
-def login (request):
-    return render(request,"principal/login.html") 
-
+# Gestión de adultos
 class AdultListView(ListView):
     model=Adult
     template_name="principal/adult/adult_list.html"
@@ -50,6 +52,7 @@ class AdultCreate(CreateView):
     fields = ['name','lastName','mLastName','birthDate','civilStatus','gender','phase','nacionality','religion',
     'birthPlace']
 
+# Gestión de tutores
 class TutorListView(ListView):
     model=Tutor
     template_name="principal/tutor/tutor_list.html"
@@ -64,6 +67,7 @@ class TutorCreate(CreateView):
     fields = ['adult','name','lastName','mLastName','relationship','email','phone','address','gender','knowledge','observation','status',
     'reason']
 
+# Gestión de Cuidadores
 class CaregiverListView(ListView):
     model=Caregiver
     template_name="principal/caregiver/caregiver_list.html"
