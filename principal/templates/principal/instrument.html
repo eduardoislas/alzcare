@@ -2,9 +2,12 @@
 {% load static %}
 {% block title %}{{instrument.name}}{% endblock %}
 {% block styles %}{% endblock %}
-{% block scripts %}{% endblock %}
+{% block scripts %}
+<script type="text/javascript" src="{% static 'principal/js/alzcare-instrument-1.js' %}"></script>
+{% endblock %}
 
 {% block content %}
+<input  name="csrfToken" type="hidden" value="{% csrf_token %}" />
 <form action="/instrumentos/" method="POST">
 {% csrf_token %}
 <div class="card-cv">
@@ -33,7 +36,7 @@
                     {% for option in options %}
                     <td>
                         <div class="radio">
-                            <label><input type="radio" name="radio{{question.item}}" value={{option.value}}></label>
+                            <label><input type="radio" onclick="addAnswer(this);" name="{{question.item}}" value={{option.id}} /></label>
                         </div>
                     </td>
                     {% endfor %}
@@ -70,7 +73,8 @@
         <!-- /.box-body -->
       </div>
     <div class="pull-right">
-        <button class="btn btn-primary btn-lg" type="submit" value="Guardar">Guardar</button>
+        <a href="#" class="btn btn-primary btn-lg" onclick="sendAnswers();" >Guardar</a>
+        <!-- <button class="btn btn-primary btn-lg" type="submit" value="Guardar">Guardar</button> -->
     </div>
 </div>
 </form>

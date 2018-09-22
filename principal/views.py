@@ -1,8 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render 
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 from .models import *
+
+import json
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -35,6 +38,17 @@ def instrumento (request):
     
 def login (request):
     return render(request,"principal/login.html") 
+
+def resultQuiz(request):
+    respuestas = request.POST.get('result_list')
+    datas  = json.loads(respuestas)
+    answer_list = []
+    for a in datas:
+        answer = Answer()
+        answer.question = Question.objects.get(pk = a['question'])
+        answer.option = Option.objects.get(pk = a['option']) 
+        answer_list.append(answer)
+    return render(request,"principal/home.html")
 
 class AdultListView(ListView):
     model=Adult

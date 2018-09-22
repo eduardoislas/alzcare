@@ -26,6 +26,7 @@ urlpatterns = [
     path('home/', login_required(views.home), name="home"),
     path('instrumentos/',login_required(views.instrumentos), name = "instrumentos"),
     path('instrumento/',login_required(views.instrumento), name = "instrumento"),
+    path('results',login_required(views.resultQuiz), name = "resultQuiz"),
   # paths de auth
     path('accounts/', include('django.contrib.auth.urls')),
   #CRUD Adultos
