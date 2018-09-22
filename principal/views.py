@@ -13,6 +13,10 @@ from django.http import JsonResponse
 def home (request):
     return render(request,"principal/home.html") 
 
+def login (request):
+    return render(request,"principal/login.html") 
+
+# Gestión de instrumentos
 def instrumentos (request):
     opciones = []
     if request.method == 'POST':
@@ -36,9 +40,6 @@ def instrumento (request):
         options = Option.objects.all()
     return render(request,"principal/instrument.html",{'instrument':instrument, 'questions':questions, 'options':options})
     
-def login (request):
-    return render(request,"principal/login.html") 
-
 def resultQuiz(request):
     respuestas = request.POST.get('result_list')
     datas  = json.loads(respuestas)
@@ -50,6 +51,7 @@ def resultQuiz(request):
         answer_list.append(answer)
     return render(request,"principal/home.html")
 
+# Gestión de adultos
 class AdultListView(ListView):
     model=Adult
     template_name="principal/adult/adult_list.html"
@@ -63,3 +65,35 @@ class AdultCreate(CreateView):
     template_name="principal/adult/adult_create.html"
     fields = ['name','lastName','mLastName','birthDate','civilStatus','gender','phase','nacionality','religion',
     'birthPlace']
+
+# Gestión de tutores
+class TutorListView(ListView):
+    model=Tutor
+    template_name="principal/tutor/tutor_list.html"
+
+class TutorDetailView(DetailView):
+    model=Tutor
+    template_name="principal/tutor/tutor_detail.html"
+
+class TutorCreate(CreateView):
+    model=Tutor
+    template_name="principal/tutor/tutor_create.html"
+    fields = ['adult','name','lastName','mLastName','relationship','email','phone','address','gender','knowledge','observation','status',
+    'reason']
+
+# Gestión de Cuidadores
+class CaregiverListView(ListView):
+    model=Caregiver
+    template_name="principal/caregiver/caregiver_list.html"
+
+class CaregiverDetailView(DetailView):
+    model=Caregiver
+    template_name="principal/caregiver/caregiver_detail.html"
+
+class CaregiverCreate(CreateView):
+    model=Caregiver
+    template_name="principal/caregiver/caregiver_create.html"
+    fields = ['adult','name','lastName','mLastName','civilStatus','ocupation','relationship','email','phone','address','gender','status','availability','isPrincipal',
+    'reason']
+
+    

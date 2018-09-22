@@ -1,0 +1,50 @@
+{% extends 'principal/layout.html' %}
+
+{% block title %}Listado de Tutores{% endblock %}
+
+
+
+{% block background %}{% endblock %}
+
+{% block headers %}
+
+{% endblock %}
+
+{% block content %}
+<div class="card-cv">
+        <section class="content-header">
+                <h1>Tutores</h1>
+            </section>
+    <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">Tutores</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body no-padding">
+          <table class="table table-condensed">
+            <tr>
+              <th>Nombre</th>
+              <th>Estatus</th>
+              <th>Opciones</th>
+            </tr>
+            {% for tutor in object_list %}
+            <tr>
+                        <td>{{tutor}}</td>
+                        <td>{{tutor.status}}</td>
+                        <td>
+                            <a href="{% url "tutor_detail" tutor.id %}" class="btn btn-primary">Ver</a>
+                        </td>
+                </tr>
+
+            {% endfor %}
+          </table>
+          </div>
+        <!-- /.box-body -->
+      </div>
+      <div class="pull-right">
+      <a href="{% url "tutor_create" %}" class="btn btn-success">Agregar</a>
+    <a href="{% url "home" %}" class="btn btn-info">Regresar</a>
+</div>
+</div>
+{% endblock %}
+ 
