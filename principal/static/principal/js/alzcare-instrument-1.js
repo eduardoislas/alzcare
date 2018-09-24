@@ -83,7 +83,22 @@ function sendAnswers() {
         url: '/results',
         data: { result_list: res },
         success: function (data) {
-            console.log(data);
+            if(data.success){
+                loaderOFF();
+
+                swal({
+                    title: "!Listo!",
+                    text: data.mensaje,
+                    icon: "success",
+                    button: "Aceptar",
+                    
+                }).then(function () {
+                    var protocolo = window.location.protocol;
+                    var host = window.location.host;
+                    window.location.href = protocolo + "//" + host + "/home/";
+                });
+            }
         }
     });
 }
+var damian ;

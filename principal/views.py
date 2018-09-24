@@ -49,7 +49,7 @@ def resultQuiz(request):
         answer.question = Question.objects.get(pk = a['question'])
         answer.option = Option.objects.get(pk = a['option']) 
         answer_list.append(answer)
-    return render(request,"principal/home.html")
+    return JsonResponse({'success' : 'true',  'mensaje': 'Se guardo con exito' },safe=False)
 
 # Gestión de adultos
 class AdultListView(ListView):
