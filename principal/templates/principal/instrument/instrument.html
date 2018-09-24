@@ -8,7 +8,6 @@
 {% endblock %}
 
 {% block content %}
-<input  name="csrfToken" type="hidden" value="{% csrf_token %}" />
 <form action="/instrumentos/" method="POST">
 {% csrf_token %}
 <div class="card-cv">
@@ -24,7 +23,7 @@
           <table class="table table-condensed">
           {% if instrument.style == 1%}
             <tr>
-                <th>Num</th>
+                <th>Ítem</th>
                 <th>Pregunta</th>
                 {% for option in options %}
                 <th>{{option.description}}</th>
@@ -74,6 +73,8 @@
         <!-- /.box-body -->
       </div>
     <div class="pull-right">
+        <input  name="instrument" type="hidden" value="{{instrument.id}}" />
+        <input  name="application" type="hidden" value="{{application.id}}" />
         <a href="#" class="btn btn-primary btn-lg" onclick="sendAnswers();" >Guardar</a>
         <!-- <button class="btn btn-primary btn-lg" type="submit" value="Guardar">Guardar</button> -->
     </div>

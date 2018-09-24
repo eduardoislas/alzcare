@@ -21,7 +21,7 @@
     <div class="wrapper">
         <header class="main-header">
             <!-- Logo -->
-            <a href="#" class="logo">
+            <a href="{% url 'home' %}" class="logo">
 
             </a>
             <!-- Header Navbar: style can be found in header.less -->
@@ -72,25 +72,17 @@
                             </span>
                         </a>
                     </li>
-                  
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fas fa-users"></i> <span>Usuarios</span>
-                            <span class="pull-right-container">
-                                <i class="fas fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
+                {% if  request.user.is_staff == False %} 
                     <li class="treeview">
                         <a href="{% url 'instrumentos' %}">
-                            <i class="fas fa-question-circle"></i> <span>Instrumentos</span>
+                            <i class="fas fa-file-alt"></i> <span>Instrumentos</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                     </li>
-
+                {% endif %}
+                {% if  request.user.is_staff %}    
                     <li class="treeview">
                         <a href="{% url 'adult_list' %}">
                             <i class="fa fa-heartbeat"></i> <span>Gestión Adultos</span>
@@ -99,22 +91,23 @@
                             </span>
                         </a>
                     </li>
-                     <li class="treeview">
-                        <a href="{% url 'tutor_list' %}">
-                            <i class="fa fa-heartbeat"></i> <span>Gestión Tutores</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                    </li>
                        <li class="treeview">
                         <a href="{% url 'caregiver_list' %}">
-                            <i class="fa fa-heartbeat"></i> <span>Gestión Cuidadores</span>
+                            <i class="fas fa-users"></i> <span>Gestión Cuidadores</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                     </li>
+                    <li class="treeview">
+                        <a href="{% url 'application_list' %}">
+                            <i class="fas fa-folder-open"></i> <span>Gestión Instrumentos</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                    </li>
+                {% endif %}
                 </ul>
             </section>
             <!-- /.sidebar -->

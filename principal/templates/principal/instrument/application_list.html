@@ -1,0 +1,52 @@
+{% extends 'principal/layout.html' %}
+
+{% block title %}Listado de Periodos de aplicación de instrumentos{% endblock %}
+
+
+
+{% block background %}{% endblock %}
+
+{% block headers %}
+
+{% endblock %}
+
+{% block content %}
+<div class="card-cv">
+        <section class="content-header">
+                <h1>Listado de periodos de aplicación de instrumentos</h1>
+            </section>
+    <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">Aplicaciones</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body no-padding">
+          <table class="table table-condensed">
+            <tr>
+              <th>Número de periodo</th>
+              <th>Año</th>
+              <th>Estatus</th>
+              <th>Acciones</th>
+            </tr>
+            {% for application in object_list %}
+            <tr>
+                        <td>{{application.period}}</td>
+                        <td>{{application.year}}</td>
+                        <td>{{application.status}}</td>
+                        <td>
+                            <a href="#" class="btn btn-primary">Modificar</a>
+                        </td>
+                </tr>
+
+            {% endfor %}
+          </table>
+          </div>
+        <!-- /.box-body -->
+      </div>
+      <div class="pull-right">
+      <a href="{% url "application_create" %}" class="btn btn-success">Agregar</a>
+    <a href="{% url "home" %}" class="btn btn-info">Regresar</a>
+</div>
+</div>
+{% endblock %}
+ 
