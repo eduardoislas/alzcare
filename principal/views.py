@@ -64,18 +64,7 @@ def resultQuiz(request):
         answer.question = Question.objects.get(pk = a['question'])
         answer.option = Option.objects.get(pk = a['option']) 
         answer_list.append(answer)
-<<<<<<< HEAD
     return JsonResponse({'success' : 'true',  'mensaje': 'Se guardo con exito' },safe=False)
-=======
-        score+= answer.option.value
-    iresult.score = score
-    iresult.save()
-    #Si guarda el instrument result pero la lista de respuestas no.
-    for ans in answer_list:
-        ans.instrumentresult = iresult
-        ans.save()
-    return render(request,"principal/home.html")
->>>>>>> 133d1b81669629134e77ed84e2897a9f534c0ac4
 
 # Gestión de adultos
 class AdultListView(ListView):
