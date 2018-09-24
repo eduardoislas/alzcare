@@ -45,7 +45,7 @@ def instrumento (request):
     elif instrument.style==2:
         options = Option.objects.all()
     return render(request,"principal/instrument/instrument.html",{'instrument':instrument, 'questions':questions, 'options':options, 'instrument':instrument, 'application':iapp})
-    
+
 def resultQuiz(request):
     #Datos hardcodeados
     instrument = Instrument.objects.get(pk=1)
@@ -55,15 +55,20 @@ def resultQuiz(request):
     iresult.instrument = instrument
     iresult.iapplication = iapp
     iresult.caregiver = Caregiver.objects.get(user=request.user)
+    iresult.score = 0
+    iresult.save()
     respuestas = request.POST.get('result_list')
     datas  = json.loads(respuestas)
-    answer_list = []
     score=0
     for a in datas:
         answer = Answer()
         answer.question = Question.objects.get(pk = a['question'])
         answer.option = Option.objects.get(pk = a['option']) 
-        answer_list.append(answer)
+        answer.instrumentResult = iresult
+        answer.save()
+        score+= answer.option.value
+    iresult.score=score
+    iresult.save()
     return JsonResponse({'success' : 'true',  'mensaje': 'Se guardo con exito' },safe=False)
 
 # Gestión de adultos
