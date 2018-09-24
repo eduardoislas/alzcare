@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -56,7 +57,7 @@ class Caregiver(models.Model):
     reason = models.TextField(verbose_name="Razón por la que es el cuidador principal", null=True, blank=True)
     STATUS_CG=(('A','Activo'),('I','Inactivo'))
     status = models.CharField(max_length=1, choices= STATUS_CG, default='A')
-    #user = models.OneToOneField(User, unique=True, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, unique=True, on_delete=models.CASCADE,null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación")
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")
 
@@ -86,7 +87,6 @@ class Tutor(models.Model):
     observation = models.TextField(verbose_name="Observaciones")
     STATUS_CG=(('A','Activo'),('I','Inactivo'))
     status = models.CharField(max_length=1, choices= STATUS_CG, default='A')
-    #user = models.OneToOneField(User, unique=True, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación")
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")
 

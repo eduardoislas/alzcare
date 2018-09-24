@@ -18,15 +18,19 @@ from django.urls import path,include
 from principal import views
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
-from principal.views import AdultListView, AdultDetailView, AdultCreate, TutorListView, TutorDetailView, TutorCreate, CaregiverListView, CaregiverDetailView, CaregiverCreate
+from principal.views import *
 
 urlpatterns = [
       path('', auth_views.LoginView.as_view(template_name='registration/login.html')),
     path('admin/', admin.site.urls),
     path('home/', login_required(views.home), name="home"),
+
+  #Gestión de Instrumentos
     path('instrumentos/',login_required(views.instrumentos), name = "instrumentos"),
     path('instrumento/',login_required(views.instrumento), name = "instrumento"),
     path('results',login_required(views.resultQuiz), name = "resultQuiz"),
+    path('application/', login_required(ApplicationListView.as_view()), name="application_list"),
+    path('application_create/', login_required(ApplicationCreate.as_view(success_url="/application/")), name="application_create"),
   # paths de auth
     path('accounts/', include('django.contrib.auth.urls')),
   #CRUD Adultos

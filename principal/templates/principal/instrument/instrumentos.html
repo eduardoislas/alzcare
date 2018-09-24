@@ -8,11 +8,11 @@
 {% block content %}
 <div class="card-cv">
         <section class="content-header">
-                <h1>Instrumentos</h1>
+                <h1>Aplicación {{app.period}} del año {{app.year}}</h1>
             </section>
     <div class="box">
         <div class="box-header">
-          <h3 class="box-title">Conteste los siguientes instrumentos</h3>
+          <h3 class="box-title">Conteste los siguientes instrumentos {{caregiver}}</h3>
         </div>
         <!-- /.box-header -->
         <div class="box-body no-padding">
@@ -29,6 +29,7 @@
                             <form action="/instrumento/" method="POST">
                               {% csrf_token %}
                               <input type="hidden" name="instrumento" value="{{instrument.id}}"/>
+                              <input type="hidden" name="application" value="{{app.id}}"/>
                               <button class="btn btn-basic" type="submit" value="Contestar">Contestar</button>
                             </form>
                         </td>
@@ -39,6 +40,9 @@
         </div>
         <!-- /.box-body -->
       </div>
+      <div class="pull-right">
+    <a href="{% url "home" %}" class="btn btn-info">Regresar</a>
+</div>
 </div>
 
 {% endblock %}

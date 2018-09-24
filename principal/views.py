@@ -16,18 +16,24 @@ def home (request):
 def login (request):
     return render(request,"principal/login.html") 
 
-# Gestión de instrumentos
+# Gestión de instrumentos   
 def instrumentos (request):
-    opciones = []
-    if request.method == 'POST':
-        answers = []
-        opciones = request.POST.get("respuesta")
-    instruments = Instrument.objects.filter(status="A").order_by('id')
-    return render(request,"principal/instrumentos.html",{'instruments':instruments, 'opciones':opciones})
+    applications = InstrumentApplication.objects.all()
+    caregiver = Caregiver.objects.get(user=request.user)
+    for app in applications:
+        if app.status == "A":
+            opciones = []
+            if request.method == 'POST':
+                answers = []
+                opciones = request.POST.get("respuesta")
+            instruments = Instrument.objects.filter(status="A").order_by('id')
+            return render(request,"principal/instrument/instrumentos.html",{'instruments':instruments, 'opciones':opciones, 'app':app, 'caregiver':caregiver})
+    return render(request,"principal/home.html")
 
 def instrumento (request):
     id = int(request.POST.get('instrumento'))
     instrument = Instrument.objects.get(pk=id)
+    iapp = InstrumentApplication.objects.get(pk=int(request.POST.get('application')))
     questions = Question.objects.filter(instrument_id=id)
     scales=[]
     options =[]
@@ -38,17 +44,33 @@ def instrumento (request):
         options = Option.objects.filter(scale_id=idScale)   
     elif instrument.style==2:
         options = Option.objects.all()
-    return render(request,"principal/instrument.html",{'instrument':instrument, 'questions':questions, 'options':options})
+    return render(request,"principal/instrument/instrument.html",{'instrument':instrument, 'questions':questions, 'options':options, 'instrument':instrument, 'application':iapp})
     
 def resultQuiz(request):
+    #Datos hardcodeados
+    instrument = Instrument.objects.get(pk=1)
+    #Datos hardcodeados
+    iapp = InstrumentApplication.objects.get(pk=1)
+    iresult = InstrumentResult()
+    iresult.instrument = instrument
+    iresult.iapplication = iapp
+    iresult.caregiver = Caregiver.objects.get(user=request.user)
     respuestas = request.POST.get('result_list')
     datas  = json.loads(respuestas)
     answer_list = []
+    score=0
     for a in datas:
         answer = Answer()
         answer.question = Question.objects.get(pk = a['question'])
         answer.option = Option.objects.get(pk = a['option']) 
         answer_list.append(answer)
+        score+= answer.option.value
+    iresult.score = score
+    iresult.save()
+    #Si guarda el instrument result pero la lista de respuestas no.
+    for ans in answer_list:
+        ans.instrumentresult = iresult
+        ans.save()
     return render(request,"principal/home.html")
 
 # Gestión de adultos
@@ -96,4 +118,12 @@ class CaregiverCreate(CreateView):
     fields = ['adult','name','lastName','mLastName','civilStatus','ocupation','relationship','email','phone','address','gender','status','availability','isPrincipal',
     'reason']
 
-    
+# Gestión de Periodos de Aplicación
+class ApplicationListView(ListView):
+    model=InstrumentApplication
+    template_name="principal/instrument/application_list.html"
+
+class ApplicationCreate(CreateView):
+    model=InstrumentApplication
+    template_name="principal/instrument/application_create.html"
+    fields = ['period','year','status']
