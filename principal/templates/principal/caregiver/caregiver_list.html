@@ -23,13 +23,15 @@
         <div class="box-body no-padding">
           <table class="table table-condensed">
             <tr>
-              <th>Nombre</th>
+              <th>Nombre Cuidador</th>
+              <th>Adulto a su cuidado</th>
               <th>Estatus</th>
               <th>Opciones</th>
             </tr>
             {% for caregiver in object_list %}
             <tr>
                         <td>{{caregiver}}</td>
+                        <td>{{caregiver.adult}}</td>
                         <td>{{caregiver.status}}</td>
                         <td>
                             <a href="{% url "caregiver_detail" caregiver.id %}" class="btn btn-primary">Ver</a>

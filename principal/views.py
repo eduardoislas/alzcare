@@ -20,14 +20,16 @@ def login (request):
 def instrumentos (request):
     applications = InstrumentApplication.objects.all()
     caregiver = Caregiver.objects.get(user=request.user)
+    contestados = []
+    porContestar = []
     for app in applications:
-        if app.status == "A":
-            opciones = []
-            if request.method == 'POST':
-                answers = []
-                opciones = request.POST.get("respuesta")
-            instruments = Instrument.objects.filter(status="A").order_by('id')
-            return render(request,"principal/instrument/instrumentos.html",{'instruments':instruments, 'opciones':opciones, 'app':app, 'caregiver':caregiver})
+        if app.status == "A":   
+            instruments = list(Instrument.objects.filter(status="A").order_by('id'))
+            for i in instruments:
+                contestado = InstrumentResult.objects.filter(caregiver=caregiver.id, iapplication=app.id, instrument=i.id)
+                if contestado.exists() == False:
+                    porContestar.append(i)
+            return render(request,"principal/instrument/instrumentos.html",{'instruments':instruments, 'app':app, 'caregiver':caregiver, 'porContestar':porContestar})
     return render(request,"principal/home.html")
 
 def instrumento (request):
@@ -48,7 +50,9 @@ def instrumento (request):
 
 def resultQuiz(request):
     #Datos hardcodeados
-    instrument = Instrument.objects.get(pk=1)
+    #idIns = int(request.POST.get('instrument'))
+    #idApp = int(request.POST.get('application'))
+    instrument = Instrument.objects.get(pk=5)
     #Datos hardcodeados
     iapp = InstrumentApplication.objects.get(pk=1)
     iresult = InstrumentResult()
@@ -109,6 +113,7 @@ class CaregiverListView(ListView):
 class CaregiverDetailView(DetailView):
     model=Caregiver
     template_name="principal/caregiver/caregiver_detail.html"
+    dict
 
 class CaregiverCreate(CreateView):
     model=Caregiver
@@ -125,3 +130,16 @@ class ApplicationCreate(CreateView):
     model=InstrumentApplication
     template_name="principal/instrument/application_create.html"
     fields = ['period','year','status']
+
+# Mostrar resultados al psicólogo
+def results (request):
+    applications = InstrumentApplication.objects.all()
+    caregivers = Caregiver.objects.filter(status="A")
+    return render(request,"principal/result/results.html",{"applications":applications, "caregivers":caregivers}) 
+
+def resultsDetail (request):
+    #Datos Hardcodeados - Debe recibir idCuidador y el idApplication
+    caregiver = Caregiver.objects.get(pk=1)
+    app = InstrumentApplication.objects.get(pk=1)
+    iResults = InstrumentResult.objects.filter(caregiver=1, iapplication=1)
+    return render(request,"principal/result/results_detail.html",{"iResults":iResults, "caregiver":caregiver, "app":app}) 

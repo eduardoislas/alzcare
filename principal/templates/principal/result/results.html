@@ -1,0 +1,50 @@
+{% extends 'principal/layout.html' %}
+
+{% block title %}Resultados{% endblock %}
+
+{% block background %}{% endblock %}
+
+{% block headers %}{% endblock %}
+
+{% block content %}
+<div class="card-cv">
+        <section class="content-header">
+            <h1>Listar Resultados</h1>
+        </section>
+    <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">Falta definir los filtros de búsqueda de resultados, esto es un ejemplo:</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body no-padding">
+           <h4>Periodos de Aplicación: </h4>
+           <div class="form-group">
+                 <select class="form-control" id="application" name="application">
+                    {% for a in applications %}
+                        <option value={{ a.id }}>{{a}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <h4>Cuidador: </h4>
+           <div class="form-group">
+                 <select class="form-control" id="caregiver" name="caregiver">
+                    {% for c in caregivers %}
+                        <option value={{ c.id }}>{{c}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <form action="/resultsDetail/" method="POST">
+                    {% csrf_token %}
+                    <button class="btn btn-primary" type="submit" value="resultados">Ver resultados</button>
+                </form>
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <div class="pull-right">
+                
+    <a href="{% url "home" %}" class="btn btn-info">Regresar</a>
+</div>
+</div>
+
+
+{% endblock %}

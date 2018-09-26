@@ -95,7 +95,7 @@ function sendAnswers() {
                 }).then(function () {
                     var protocolo = window.location.protocol;
                     var host = window.location.host;
-                    window.location.href = protocolo + "//" + host + "/home/";
+                    window.location.href = protocolo + "//" + host + "/instrumentos/";
                 });
             }
         }

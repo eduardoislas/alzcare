@@ -1,36 +1,38 @@
 
 {% extends 'principal/layout.html' %}
 {% load static %}
-{% block title %}Instrumentos{% endblock %}
+{% block title %}Detalle de Resultados{% endblock %}
 {% block styles %}{% endblock %}
 {% block scripts %}{% endblock %}
 
 {% block content %}
 <div class="card-cv">
         <section class="content-header">
-                <h1>Aplicación {{app.period}} del año {{app.year}}</h1>
+                <h1>Resultados de la Aplicación {{app.period}} del año {{app.year}}</h1>
             </section>
     <div class="box">
         <div class="box-header">
-          <h3 class="box-title">Conteste los siguientes instrumentos {{caregiver}}</h3>
+          <h3 class="box-title">Cuidador: {{caregiver}}</h3>
         </div>
         <!-- /.box-header -->
         <div class="box-body no-padding">
           <table class="table table-condensed">
             <tr>
-              <th>Nombre</th>
-              <th>Opciones</th>
+              <th>Instrumento</th>
+              <th>Puntuación</th>
+              <th>Score obtenido</th>
+              <th>Detalle</th>
             </tr>
-            {% for instrument in porContestar %}
+            {% for ir in iResults %}
                 <h2></h2> 
                 <tr>
-                        <td>{{instrument.name}}</td>
+                        <td>{{ir.instrument.name}}</td>
+                        <td>{{ir.instrument.maxValue}}</td>
+                        <td>{{ir.score}}</td>
                         <td>
-                            <form action="/instrumento/" method="POST">
+                            <form action="#" method="POST">
                               {% csrf_token %}
-                              <input type="hidden" name="instrumento" value="{{instrument.id}}"/>
-                              <input type="hidden" name="application" value="{{app.id}}"/>
-                              <button class="btn btn-basic" type="submit" value="Contestar">Contestar</button>
+                              <button class="btn btn-basic" type="submit" value="Contestar">Ver Detalle</button>
                             </form>
                         </td>
                 </tr>
@@ -46,4 +48,3 @@
 </div>
 
 {% endblock %}
-
