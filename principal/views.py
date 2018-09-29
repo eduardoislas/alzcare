@@ -122,13 +122,13 @@ class CaregiverCreate(CreateView):
     'reason']
 
 # Gestión de Periodos de Aplicación
-class ApplicationListView(ListView):
+class ValorationListView(ListView):
     model=InstrumentApplication
-    template_name="principal/instrument/application_list.html"
+    template_name="principal/instrument/valoration_list.html"
 
-class ApplicationCreate(CreateView):
+class ValorationCreate(CreateView):
     model=InstrumentApplication
-    template_name="principal/instrument/application_create.html"
+    template_name="principal/instrument/valoration_create.html"
     fields = ['period','year','status']
 
 # Mostrar resultados al psicólogo
