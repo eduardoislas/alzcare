@@ -50,11 +50,11 @@ def instrumento (request):
 
 def resultQuiz(request):
     #Datos hardcodeados
-    #idIns = int(request.POST.get('instrument'))
-    #idApp = int(request.POST.get('application'))
-    instrument = Instrument.objects.get(pk=5)
+    idIns = request.POST.get('instrument')
+    idApp = request.POST.get('application')
+    instrument = Instrument.objects.get(pk=idIns)
     #Datos hardcodeados
-    iapp = InstrumentApplication.objects.get(pk=1)
+    iapp = InstrumentApplication.objects.get(pk=idApp)
     iresult = InstrumentResult()
     iresult.instrument = instrument
     iresult.iapplication = iapp
@@ -140,6 +140,6 @@ def results (request):
 def resultsDetail (request):
     #Datos Hardcodeados - Debe recibir idCuidador y el idApplication
     caregiver = Caregiver.objects.get(pk=1)
-    app = InstrumentApplication.objects.get(pk=1)
-    iResults = InstrumentResult.objects.filter(caregiver=1, iapplication=1)
+    app = InstrumentApplication.objects.get(pk=2)
+    iResults = InstrumentResult.objects.filter(caregiver=1, iapplication=2)
     return render(request,"principal/result/results_detail.html",{"iResults":iResults, "caregiver":caregiver, "app":app}) 
