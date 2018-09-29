@@ -29,8 +29,8 @@ urlpatterns = [
     path('instrumentos/',login_required(views.instrumentos), name = "instrumentos"),
     path('instrumento/',login_required(views.instrumento), name = "instrumento"),
     path('results',login_required(views.resultQuiz), name = "resultQuiz"),
-    path('application/', login_required(ApplicationListView.as_view()), name="application_list"),
-    path('application_create/', login_required(ApplicationCreate.as_view(success_url="/application/")), name="application_create"),
+    path('valoration/', login_required(ValorationListView.as_view()), name="valoration_list"),
+    path('valoration_create/', login_required(ValorationCreate.as_view(success_url="/valoration/")), name="valoration_create"),
   # paths de auth
     path('accounts/', include('django.contrib.auth.urls')),
   #CRUD Adultos

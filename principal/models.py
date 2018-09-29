@@ -126,12 +126,12 @@ class InstrumentApplication(models.Model):
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")
 
     class Meta:
-        verbose_name = "Aplicación de Instrumentos"
-        verbose_name_plural = "Aplicaciones de Instrumentos"
+        verbose_name = "Valoración"
+        verbose_name_plural = "Valoraciones"
         ordering = ["-created"]
 
     def __str__(self):
-        cadena = "Aplicación {0} del año {1}"
+        cadena = "Valoración {0} del año {1}"
         return cadena.format(self.period, self.year)
 
 class Instrument(models.Model):
