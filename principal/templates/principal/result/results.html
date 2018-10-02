@@ -3,6 +3,31 @@
 {% block title %}Resultados{% endblock %}
 
 {% block background %}{% endblock %}
+{% block scripts%} 
+<script>
+
+var ctx = document.getElementById('myChart').getContext('2d');
+var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+        labels: [ {% for caregivers in caregivers %},'{{caregivers.name}}', {% endfor %}],
+        datasets: [{
+            label: "Resultados De Instrumentos",
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [{% for instrumentresults in instrumentresults %},'{{instrumentresults.score}}', {% endfor %}],
+        }]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+
+</script>
+{% endblock %}
 
 {% block headers %}{% endblock %}
 
@@ -44,6 +69,7 @@
                 
     <a href="{% url "home" %}" class="btn btn-info">Regresar</a>
 </div>
+<canvas id="myChart" width="400" height="400"></canvas>
 </div>
 
 

@@ -134,8 +134,9 @@ class ValorationCreate(CreateView):
 # Mostrar resultados al psicólogo
 def results (request):
     applications = InstrumentApplication.objects.all()
+    instrumentresults = InstrumentResult.objects.all()
     caregivers = Caregiver.objects.filter(status="A")
-    return render(request,"principal/result/results.html",{"applications":applications, "caregivers":caregivers}) 
+    return render(request,"principal/result/results.html",{"applications":applications, "caregivers":caregivers,"instrumentresults":instrumentresults}) 
 
 def resultsDetail (request):
     #Datos Hardcodeados - Debe recibir idCuidador y el idApplication
