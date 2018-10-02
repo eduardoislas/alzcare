@@ -4,3 +4,4 @@ principal/__pycache__/
 principal/views.py
 .vscode/launch.json
 principal/migrations/
+registration/__pycache__/
