@@ -60,7 +60,7 @@ def resultQuiz(request):
     iresult.iapplication = iapp
     iresult.caregiver = Caregiver.objects.get(user=request.user)
     iresult.score = 0
-    iresult.save()
+    #iresult.save()
     respuestas = request.POST.get('result_list')
     datas  = json.loads(respuestas)
     score=0
@@ -69,10 +69,10 @@ def resultQuiz(request):
         answer.question = Question.objects.get(pk = a['question'])
         answer.option = Option.objects.get(pk = a['option']) 
         answer.instrumentResult = iresult
-        answer.save()
+        #answer.save()
         score+= answer.option.value
     iresult.score=score
-    iresult.save()
+    #iresult.save()
     return JsonResponse({'success' : 'true',  'mensaje': 'Se guardo con exito' },safe=False)
 
 # Gestión de adultos
