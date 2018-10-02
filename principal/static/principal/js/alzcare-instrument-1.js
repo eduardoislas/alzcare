@@ -81,7 +81,7 @@ function sendAnswers() {
         type: 'POST',
         dataType: 'json',
         url: '/results',
-        data: { result_list: res },
+        data: { result_list: res, instrument: 32 },
         success: function (data) {
             if(data.success){
                 loaderOFF();

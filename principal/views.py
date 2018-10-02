@@ -50,7 +50,7 @@ def instrumento (request):
 
 def resultQuiz(request):
     #Datos hardcodeados
-    #idIns = int(request.POST.get('instrument'))
+    idIns = int(request.POST.get('instrument'))
     #idApp = int(request.POST.get('application'))
     instrument = Instrument.objects.get(pk=5)
     #Datos hardcodeados
