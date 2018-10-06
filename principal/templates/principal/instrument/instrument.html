@@ -56,7 +56,7 @@
                     <td>{{question.description}}</td>
                     <td>
                         <div class="form-group">
-                        <select class="form-control" id="respuesta" name="respuestas">
+                        <select class="form-control"  id="respuesta" name="{{question.id}}"  onChange="addAnswer(this);" >
                         {% for option in options %}
                             {% if question.scale_id == option.scale_id %}
                                     <option value={{ option.id }}>{{option.description}}</option>

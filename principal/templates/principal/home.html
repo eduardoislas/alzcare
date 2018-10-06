@@ -7,9 +7,13 @@
 {% block background %}{% endblock %}
 
 {% block headers %}
-Algo
+
 {% endblock %}
 
 {% block content %}
-<h2>Este es el HOME de la aplicación, falta definir contenido </h2>
+{% load static %}
+<div >
+    
+    <img class="center" src="{% static 'principal/img/home.png' %}" alt="Dorita de Ojeda" >
+</div>
 {% endblock %}
