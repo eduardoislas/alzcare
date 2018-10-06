@@ -9,33 +9,82 @@
 {% block headers %}
 
 {% endblock %}
-
+{% load widget_tweaks %}
 {% block content %}
-
-
 
 <div class="card-cv">
         <section class="content-header">
-                <h1>Agregar Adulto</h1>
+                <h1>Adulto</h1>
             </section>
     <div class="box">
-        <div class="box-header">
-          <h3 class="box-title">Complete los campos solicitados</h3>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body no-padding">
+            <form action="" method="POST">
+                    {% csrf_token %}
+            <div class="box-body">
+                        <div class="form-group col-md-6">
+                           <label for="">{{form.name.label}}</label>
+                           {% render_field form.name class="form-control" %}
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="">{{form.birthDate.label}}</label>
+                            {% render_field form.birthDate class="form-control" placeholder="dia/mes/año" %}
+                        </div>
+                        <div class="form-group col-md-6">
+                                <label for="">{{form.lastName.label}}</label>
+                                {% render_field form.lastName class="form-control"%}
+                        </div>
+                  
+                    <div class="form-group col-md-6">
+                            <label for="">{{form.nacionality.label}}</label>
+                            {% render_field form.nacionality class="form-control"%}
+                    </div>
+                    <div class="form-group col-md-6">
+                            <label for="">{{form.mLastName.label}}</label>
+                            {% render_field form.mLastName class="form-control"%}
+                    </div>
+                    <div class="form-group col-md-6">
+                            <label for="">{{form.birthPlace.label}}</label>
+                            {% render_field form.birthPlace class="form-control"%}
+                    </div>
+                    <div class="form-group col-md-6">
+                            <label for="">{{form.civilStatus.label}}</label>
+                            {% render_field form.civilStatus class="form-control"%}
+                    </div>
+                    <div class="form-group col-md-6">
+                            <label for="">{{form.religion.label}}</label>
+                            {% render_field form.religion class="form-control"%}
+                    </div>
+                    <div class="form-group col-md-6">
+                            <label for="">{{form.gender.label}}</label>
+                            {% render_field form.gender class="form-control"%}
+                    </div>
+                    <div class="form-group col-md-6">
+                            <label for="">{{form.phase.label}}</label>
+                            {% render_field form.phase class="form-control"%}
+                    </div>
+
+                    <div id="info_client" class="col-md-12">
+
+                    </div>
+                </div>
+    </div>
+
+    <div class="box-footer text-right">
+            <a href="{% url "adult_list" %}" class="btn btn-info">Regresar</a>
+            <input type="submit" value"Guardar" class="btn btn-success"/>   
+     </div>
+    </form>
+</div>
+
+
+{% endblock %}
+
+  <!-- /.box-header -->
+ <!-- <div class="box-body no-padding">
         <form action="" method="POST">
             {% csrf_token %}
             {{ form.as_p }}
             <input type="submit" value"Guardar" class="btn btn-success"/>
         </form>
           </div>
-        <!-- /.box-body -->
-      </div>
-      <div class="pull-right">
-    <a href="{% url "adult_list" %}" class="btn btn-info">Regresar</a>
-</div>
-</div>
-
-
-{% endblock %}
+  -->       
+      <!--   /.box-body -->

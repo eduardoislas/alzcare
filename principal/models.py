@@ -13,7 +13,7 @@ class Adult(models.Model):
     mLastName = models.CharField(max_length=60, verbose_name="Apellido Materno")
     birthDate = models.DateField(verbose_name="Fecha de nacimiento")
     CIVIL_STATUS=(('C','Casado(a)'),('D','Divorciado(a)'),('V','Viudo(a)'),('S','Soltero(a)'),('U','Unión Libre'))
-    civilStatus = models.CharField(max_length=1, choices = CIVIL_STATUS, default='C')
+    civilStatus = models.CharField(max_length=1, choices = CIVIL_STATUS, default='C',verbose_name="Estado civil")
     SEXOS=(('F','Femenino'),('M','Masculino'))
     phase = models.SmallIntegerField(verbose_name="Fase")
     gender=models.CharField(max_length=1, choices=SEXOS, default ='F', verbose_name="Género")
