@@ -113,7 +113,6 @@ class CaregiverListView(ListView):
 class CaregiverDetailView(DetailView):
     model=Caregiver
     template_name="principal/caregiver/caregiver_detail.html"
-    dict
 
 class CaregiverCreate(CreateView):
     model=Caregiver
@@ -141,6 +140,6 @@ def results (request):
 def resultsDetail (request):
     #Datos Hardcodeados - Debe recibir idCuidador y el idApplication
     caregiver = Caregiver.objects.get(pk=1)
-    app = InstrumentApplication.objects.get(pk=2)
-    iResults = InstrumentResult.objects.filter(caregiver=1, iapplication=2)
+    app = InstrumentApplication.objects.get(pk=1)
+    iResults = InstrumentResult.objects.filter(caregiver=1, iapplication=1)
     return render(request,"principal/result/results_detail.html",{"iResults":iResults, "caregiver":caregiver, "app":app}) 

@@ -18,7 +18,7 @@ var chart = new Chart(ctx, {
             label: "Resultados De Instrumentos",
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
-            data: [{% for instrumentresults in instrumentresults %},'{{instrumentresults.score}}', {% endfor %}],
+            data: [{% for instrument in instrumentresults %},'{{instrument.score}}', {% endfor %}],
         }]
     },
 
