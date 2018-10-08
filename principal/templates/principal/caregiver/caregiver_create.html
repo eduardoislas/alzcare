@@ -35,7 +35,10 @@
                                 <label for="">{{form.lastName.label}}</label>
                                 {% render_field form.lastName class="form-control"%}
                         </div>
-                  
+                  <div class="form-group col-md-6">
+                            <label for="">{{form.adult.label}}</label>
+                            {% render_field form.adult class="form-control"%}
+                    </div>
                     <div class="form-group col-md-6">
                             <label for="">{{form.relationship.label}}</label>
                             {% render_field form.relationship class="form-control"%}
@@ -64,10 +67,7 @@
                             <label for="">{{form.status.label}}</label>
                             {% render_field form.status class="form-control"%}
                     </div>
-                       <div class="form-group col-md-6">
-                            <label for="">{{form.adult.label}}</label>
-                            {% render_field form.adult class="form-control"%}
-                    </div>
+                       
                      <div class="form-group col-md-6">
                             <label for="">{{form.religion.label}}</label>
                             {% render_field form.religion class="form-control"%}
@@ -110,7 +110,7 @@
     </div>
 
     <div class="box-footer text-right">
-               <a href="{% url "caregiver_list" %}" class="btn btn-info">Regresar</a>
+               <a href="{% url "adult_list" %}" class="btn btn-info">Regresar</a>
             <input type="submit" value"Guardar" class="btn btn-success"/>   
      </div>
     </form>
