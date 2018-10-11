@@ -10,7 +10,7 @@
  * Core: General Layout Style
  * -------------------------
  */
-html,
+html,.main-sidebar, .left-side
 body {
   height: 100%;
 }
