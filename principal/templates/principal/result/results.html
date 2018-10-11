@@ -4,6 +4,7 @@
 
 {% block background %}{% endblock %}
 {% block scripts%} 
+<!--
 <script>
 
 var ctx = document.getElementById('myChart').getContext('2d');
@@ -26,7 +27,7 @@ var chart = new Chart(ctx, {
     options: {}
 });
 
-</script>
+</script> -->
 {% endblock %}
 
 {% block headers %}{% endblock %}
@@ -69,7 +70,7 @@ var chart = new Chart(ctx, {
                 
     <a href="{% url "home" %}" class="btn btn-info">Regresar</a>
 </div>
-<canvas id="myChart" width="400" height="400"></canvas>
+<!--<canvas id="myChart" width="400" height="400"></canvas>-->
 </div>
 
 

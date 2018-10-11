@@ -1,3 +1,4 @@
+
 {% extends 'principal/layout.html' %}
 
 {% block title %}Agregar Tutor{% endblock %}
@@ -9,30 +10,96 @@
 {% block headers %}
 
 {% endblock %}
-
+{% load widget_tweaks %}
 {% block content %}
+
 <div class="card-cv">
         <section class="content-header">
-                <h1>Agregar Tutor</h1>
+                <h1>Tutor</h1>
             </section>
     <div class="box">
-         <div class="box-header">
-          <h3 class="box-title">Complete los campos solicitados</h3>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body no-padding">
-        <form action="" method="POST">
-             {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value"Guardar" class="btn btn-success"/>
-        </form>
-          </div>
-        <!-- /.box-body -->
-      </div>
-      <div class="pull-right">
-    <a href="{% url "tutor_list" %}" class="btn btn-info">Regresar</a>
-</div>
-</div>
+            <form action="" method="POST">
+                    {% csrf_token %}
+            <div class="box-body">
+           
+                        <div class="form-group col-md-6">
+                           <label for="">{{form.name.label}}</label>
+                           {% render_field form.name class="form-control" %}
+                        </div>
+                         
+                       
+                        <div class="form-group col-md-6">
+                                <label for="">{{form.lastName.label}}</label>
+                                {% render_field form.lastName class="form-control"%}
+                        </div>
+                  
+                 
+                    <div class="form-group col-md-6">
+                            <label for="">{{form.mLastName.label}}</label>
+                            {% render_field form.mLastName class="form-control"%}
+                    </div>
 
+                    <div class="form-group col-md-6">
+                            <label for="">{{form.adult.label}}</label>
+                            {% render_field form.adult class="form-control"%}
+                    </div>
+                    <div class="form-group col-md-6">
+                            <label for="">{{form.relationship.label}}</label>
+                            {% render_field form.relationship class="form-control"%}
+                    </div>
+                    <div class="form-group col-md-6">
+                            <label for="">{{form.email.label}}</label>
+                            {% render_field form.email class="form-control"%}
+                    </div>
+                    <div class="form-group col-md-6">
+                            <label for="">{{form.phone.label}}</label>
+                            {% render_field form.phone class="form-control"%}
+                    </div>
+                    <div class="form-group col-md-6">
+                            <label for="">{{form.address.label}}</label>
+                            {% render_field form.address class="form-control"%}
+                    </div>
+                    <div class="form-group col-md-6">
+                            <label for="">{{form.gender.label}}</label>
+                            {% render_field form.gender class="form-control"%}
+                    </div>
+                   
+                    <div class="form-group col-md-6">
+                            <label for="">{{form.status.label}}</label>
+                            {% render_field form.status class="form-control"%}
+                    </div>
+                          
+                         <div class="form-group col-md-6">
+                            <label for="">{{form.observation.label}}</label>
+                            {% render_field form.observation class="form-control"%}
+                    </div>
+                 
+                      <div class="form-group col-md-6">
+                            <label for="">{{form.knowledge.label}}</label>
+                            {% render_field form.knowledge class="form-control"%}
+                    </div>
+
+                    <div class="form-group col-md-6">
+                            <label for="">{{form.reason.label}}</label>
+                            {% render_field form.reason class="form-control"%}
+                    </div>
+
+                   
+                 
+                      
+                   
+
+                    <div id="info_client" class="col-md-12">
+
+                    </div>
+                </div>
+    </div>
+
+    <div class="box-footer text-right">
+               <a href="{% url "adult_list" %}" class="btn btn-info">Regresar</a>
+            <input type="submit" value"Guardar" class="btn btn-success"/>   
+     </div>
+    </form>
+</div>
 
 {% endblock %}

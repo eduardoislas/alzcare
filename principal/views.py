@@ -117,8 +117,8 @@ class CaregiverDetailView(DetailView):
 class CaregiverCreate(CreateView):
     model=Caregiver
     template_name="principal/caregiver/caregiver_create.html"
-    fields = ['adult','name','lastName','mLastName','civilStatus','ocupation','relationship','email','phone','address','gender','status','availability','isPrincipal',
-    'reason']
+    fields = ['adult','name','lastName','mLastName','relationship','civilStatus','ocupation','email','phone','address','gender','religion','status','availability','availabilityHome','isPrincipal',
+    'reason','user']
 
 # Gestión de Periodos de Aplicación
 class ValorationListView(ListView):
