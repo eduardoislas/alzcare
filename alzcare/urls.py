@@ -34,6 +34,8 @@ urlpatterns = [
   # paths de auth
     path('accounts/', include('django.contrib.auth.urls')),
   #CRUD Adultos
+    path('getAdults_json', login_required(views.getAdults_json), name="adults_json"),
+    path('adults/', login_required(views.adult_list), name= "adults_list"),
     path('adult/', login_required(AdultListView.as_view()), name="adult_list"),
     path('adult/<int:pk>/', login_required(AdultDetailView.as_view()), name="adult_detail"),
     path('adult_create/', login_required(AdultCreate.as_view(success_url="/adult/")), name="adult_create"),

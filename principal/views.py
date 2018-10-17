@@ -5,6 +5,7 @@ from django.views.generic.edit import CreateView
 from .models import *
 
 import json
+from django.core import serializers
 from django.http import JsonResponse
 
 
@@ -74,6 +75,13 @@ def resultQuiz(request):
     iresult.score=score
     iresult.save()
     return JsonResponse({'success' : 'true',  'mensaje': 'Se guardo con exito' },safe=False)
+## Adultos
+def adult_list(request):
+    return render(request, "principal/adult/adult_list.html")
+    
+def getAdults_json(request):
+    serialized_obj = serializers.serialize('json', Adult.objects.all())
+    return JsonResponse(serialized_obj,safe=False)
 
 # Gestión de adultos
 class AdultListView(ListView):
