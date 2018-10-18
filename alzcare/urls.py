@@ -49,6 +49,7 @@ urlpatterns = [
     path('caregiver/', login_required(CaregiverListView.as_view()), name="caregiver_list"),
     path('caregiver/<int:pk>/', login_required(CaregiverDetailView.as_view()), name="caregiver_detail"),
     path('caregiver_create/', login_required(CaregiverCreate.as_view(success_url="/caregiver/")), name="caregiver_create"),
+    path('interview_create/', login_required(InterviewCreate.as_view(success_url="/caregiver/")), name="interview_create"),
 
   #Mostrar resultados
     path('results/', login_required(views.results), name="results"),

@@ -25,16 +25,29 @@
             <tr>
               <th>Nombre Cuidador</th>
               <th>Adulto a su cuidado</th>
-              <th>Estatus</th>
-              <th>Opciones</th>
+              <th colspan="3">Opciones</th>
             </tr>
             {% for caregiver in object_list %}
             <tr>
                         <td>{{caregiver}}</td>
                         <td>{{caregiver.adult}}</td>
-                        <td>{{caregiver.status}}</td>
                         <td>
                             <a href="{% url "caregiver_detail" caregiver.id %}" class="btn btn-primary">Ver</a>
+                        </td>
+                                               <td>
+                            <form action="/interview_create/" method="POST">
+                              {% csrf_token %}
+                              <input type="hidden" name="caregiver" value="{{caregiver.id}}"/>
+                              <button class="btn btn-primary" type="submit" value="agregar">Agregar Entrevista</button>
+                            </form>
+                        </td>
+                        <td>
+                          <form action="/instrumento/" method="POST">
+                              {% csrf_token %}
+                              <input type="hidden" name="instrumento" value="{{6}}"/>
+                              <input type="hidden" name="application" value="{{1}}"/>
+                              <button class="btn btn-primary" type="submit" value="Contestar">Capturar APGAR</button>
+                            </form>
                         </td>
                 </tr>
 

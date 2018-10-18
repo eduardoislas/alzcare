@@ -23,6 +23,7 @@
             </tr>
             {% for instrument in porContestar %}
                 <h2></h2> 
+                {% if instrument.style != 3 %}
                 <tr>
                         <td>{{instrument.name}}</td>
                         <td>
@@ -34,7 +35,7 @@
                             </form>
                         </td>
                 </tr>
-
+                {% endif %}
             {% endfor %}
           </table>
         </div>

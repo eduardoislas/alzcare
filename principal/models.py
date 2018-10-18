@@ -49,7 +49,7 @@ class Caregiver(models.Model):
     mLastName = models.CharField(max_length=60, verbose_name="Apellido Materno")
     RELATION = (('E','Esposo(a)'),('H','Hijo(a)'),('A','Amigo(a)'),('F','Familiar'))
     relationship = models.CharField(max_length=1, choices = RELATION , default = 'E',verbose_name="Parentesco")
-    email = models.CharField(max_length=100, verbose_name="Correo electrónico")
+    email = models.EmailField(max_length=100, verbose_name="Correo electrónico")
     phone = models.CharField(max_length=20, verbose_name="Teléfono/Celular")
     address = models.CharField(max_length=80, verbose_name="Domicilio")
     CIVIL_STATUS=(('C','Casado(a)'),('D','Divorciado(a)'),('V','Viudo(a)'),('S','Soltero(a)'),('U','Unión Libre'))
@@ -84,7 +84,7 @@ class Tutor(models.Model):
     mLastName = models.CharField(max_length=60, verbose_name="Apellido Materno")
     RELATION = (('E','Esposo(a)'),('H','Hijo(a)'),('A','Amigo(a)'),('F','Familiar'))
     relationship = models.CharField(max_length=1, choices = RELATION , default = 'E',verbose_name="Parentesco")
-    email = models.CharField(max_length=100, verbose_name="Correo electrónico")
+    email = models.EmailField(max_length=100, verbose_name="Correo electrónico")
     phone = models.CharField(max_length=20, verbose_name="Teléfono/Celular")
     address = models.CharField(max_length=80, verbose_name="Domicilio")
     SEXOS=(('F','Femenino'),('M','Masculino'))
@@ -107,8 +107,20 @@ class Tutor(models.Model):
         return cadena.format(self.name, self.lastName, self.mLastName)
 
 class Interview(models.Model):
-    adult = models.OneToOneField(Adult, unique=True, on_delete=models.CASCADE)
-    q1 = models.CharField(max_length=60, verbose_name="Prueba aún....")
+    caregiver = models.OneToOneField(Caregiver, unique=True, on_delete=models.CASCADE)
+    q1 = models.CharField(max_length=200, verbose_name="¿Cuáles cree usted que serían ls principales necesidades que tendría que enfrentar como cuidador de una persona con Alzheimer?")
+    options=(('S','Si'),('N','No'))
+    q2 = models.CharField(max_length=1, choices=options, default='S', verbose_name="¿Recibe usted ayuda de otros familiares para solventar los costos de la enfermedad?")
+    q3 = models.CharField(max_length=100, verbose_name="¿De quién?", null=True, blank = True)
+    q4 = models.CharField(max_length=1, choices=options, default='S', verbose_name="¿Considera usted que en algún momento dejaría de ser cuidador?")
+    q5 = models.CharField(max_length=100, verbose_name="¿Por qué?", null=True, blank = True)
+    q6 = models.PositiveIntegerField(verbose_name="¿En una escala del 1 al 10 siendo 1 muy mal y 10 excelente cómo considera que se encuentra su familia en estos momentos?")
+    q7 = models.CharField(max_length=100, verbose_name="¿Por qué?", null=True, blank = True)
+    q8 = models.TextField(verbose_name="¿Cómo se ha informado la familia sobre la enfermedad ALZHEIMER?", null=True, blank = True)
+    q9 = models.TextField(verbose_name="¿Cómo concibe la familia la enfermedad de ALZHEIMER?", null=True, blank = True)
+    q10 = models.TextField(verbose_name="¿Qué representa para ustedes en estos momentos de su vida que su familiar padezca de Alzheimer?", null=True, blank = True)
+    q11 = models.CharField(max_length=100, verbose_name="¿Comparte usted con algún familiar estos sentimientos?", null=True, blank = True)
+    q12 = models.TextField(verbose_name="¿Cual es la parte más difícil que han tenido que afrontar como familia ante esta enfermedad?", null=True, blank = True)
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación")
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")
 
@@ -148,7 +160,7 @@ class Instrument(models.Model):
     STATUS_INS=(('A','Activo'),('I','Inactivo'))
     status = models.CharField(max_length=1, choices= STATUS_INS, default='A')
     maxValue = models.SmallIntegerField()
-    STYLE_OPTION=((1,'Misma escala'),('2','Escala por pregunta'))
+    STYLE_OPTION=((1,'Misma escala'),('2','Escala por pregunta'),('3','Misma Escala/Entrevista'))
     style = models.SmallIntegerField(choices= STYLE_OPTION, default=1, verbose_name="Tipo de cuestionario")
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación")
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")
@@ -209,6 +221,7 @@ class InstrumentResult(models.Model):
     status = models.CharField(max_length=1, choices= STATUS_INS, default='A')
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación")
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")
+    percentage = models.DecimalField(max_digits=4, decimal_places=1, verbose_name="Porcentaje",null= True, blank = True)
 
     class Meta:
         verbose_name = "Resultado de Instrumento"

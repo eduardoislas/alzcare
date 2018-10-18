@@ -123,8 +123,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- Optionally, you can add icons to the links 
           <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
           -->
-          {% if  request.user.is_staff == False %} 
-          <li class="treeview">
+        {% if  request.user.is_staff == False %} 
+          <li>
               <a href="{% url 'instrumentos' %}">
                 <i class="fa fa-book"></i> <span>Instrumentos</span>
                   <span class="pull-right-container">
@@ -132,7 +132,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </span>
               </a>
           </li>
-      {% endif %}
+        {% endif %}
       {% if  request.user.is_staff %}    
                       <li>
                           <!-- <a href="{% url 'adults_list' %}"> -->

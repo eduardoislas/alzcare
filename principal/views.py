@@ -40,21 +40,19 @@ def instrumento (request):
     questions = Question.objects.filter(instrument_id=id)
     scales=[]
     options =[]
-    if instrument.style==1:
+    if instrument.style==1 or instrument.style==3:
         for q in questions:
             idScale = q.scale_id
             break
         options = Option.objects.filter(scale_id=idScale)   
     elif instrument.style==2:
         options = Option.objects.all()
-    return render(request,"principal/instrument/instrument.html",{'instrument':instrument, 'questions':questions, 'options':options, 'instrument':instrument, 'application':iapp})
+    return render(request,"principal/instrument/instrument.html",{'instrument':instrument, 'questions':questions, 'options':options, 'application':iapp})
 
 def resultQuiz(request):
-    #Datos hardcodeados
     idIns = request.POST.get('instrument')
     idApp = request.POST.get('application')
     instrument = Instrument.objects.get(pk=idIns)
-    #Datos hardcodeados
     iapp = InstrumentApplication.objects.get(pk=idApp)
     iresult = InstrumentResult()
     iresult.instrument = instrument
@@ -73,8 +71,10 @@ def resultQuiz(request):
         answer.save()
         score+= answer.option.value
     iresult.score=score
+    iresult.percentage = (score*100)/instrument.maxValue
     iresult.save()
-    return JsonResponse({'success' : 'true',  'mensaje': 'Se guardo con exito' },safe=False)
+    return JsonResponse({'success' : 'true',  'mensaje': 'Se guardó con éxito' },safe=False)
+
 ## Adultos
 def adult_list(request):
     return render(request, "principal/adult/adult_list.html")
@@ -137,7 +137,12 @@ class CaregiverCreate(CreateView):
     fields = ['adult','name','lastName','mLastName','relationship','civilStatus','ocupation','email','phone','address','gender','religion','status','availability','availabilityHome','isPrincipal',
     'reason','user']
 
-# Gestión de Periodos de Aplicación
+class InterviewCreate(CreateView):
+    model=Interview
+    template_name="principal/caregiver/interview_create.html"
+    fields = ['q1','q2','q3','q4','q5']
+
+# Gestión de Periodos de Valoración
 class ValorationListView(ListView):
     model=InstrumentApplication
     template_name="principal/instrument/valoration_list.html"

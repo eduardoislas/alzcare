@@ -21,7 +21,7 @@
         <!-- /.box-header -->
         <div class="box-body no-padding">
           <table class="table table-condensed">
-          {% if instrument.style == 1%}
+          {% if instrument.style == 1 or instrument.style == 3%}
             <tr>
                 <th>Ítem</th>
                 <th>Pregunta</th>
@@ -75,12 +75,14 @@
     <div class="pull-right">
         <form action="/instrumento/" method="POST">
         {% csrf_token %}
-        <!--Necesito estos 2 atributos para recuperarlos con POST-->
         <input id="instrument" name="instrument" type="hidden" value="{{instrument.id}}" />
         <input id="application" name="application" type="hidden" value="{{application.id}}" />
-        <a href="{% url "instrumentos" %}" class="btn btn-info">Regresar</a>
+        {% if instrument.style == 3 %}
+            <a href="{% url "caregiver_list" %}" class="btn btn-info">Regresar</a>
+        {% else %}
+            <a href="{% url "instrumentos" %}" class="btn btn-info">Regresar</a>
+        {% endif %}
         <a href="#" type="submit" class="btn btn-primary btn-lg" onclick="sendAnswers();" >Guardar</a>
-        <!-- <button class="btn btn-primary btn-lg" type="submit" value="Guardar">Guardar</button> -->
         </form>
     </div>
 </div>
