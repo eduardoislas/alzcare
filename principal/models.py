@@ -7,6 +7,13 @@ from django.contrib.auth.models import User
 """ 
 Modelos utilizados en la entrevista inicial.
 """
+"""
+DTOS
+"""
+class adult_DTO():
+    name = models.CharField(max_length=60)
+    phase = models.SmallIntegerField()
+
 class Adult(models.Model):
     name = models.CharField(max_length=60, verbose_name="Nombre(s)")
     lastName = models.CharField(max_length=60, verbose_name="Apellido Paterno")

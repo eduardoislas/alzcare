@@ -3,7 +3,7 @@
 {% block title %}Listado de Adultos{% endblock %}
 
 {% block styles %}
-<link rel="stylesheet" type="text/css" href="{% static 'principal/grid/css/dataTables.bootstrap.min.css' %}" />
+<!--<link rel="stylesheet" type="text/css" href="{% static 'principal/grid/css/dataTables.bootstrap.min.css' %}" />-->
 <link rel="stylesheet" type="text/css" href="{% static 'principal/grid/css/responsive.bootstrap.min.css' %}" />
 {% endblock %}
 {% block scripts %}
@@ -15,7 +15,7 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 {% endblock %}
 
-{% block background %}{% endblock %}
+
 
 {% block headers %}
 
@@ -34,7 +34,7 @@
         <table id="adults" class="table table-bordered table-striped"></table>
 
 
-          <!--
+          
           <table class="table table-condensed">
             <tr>
               <th>Nombre</th>
@@ -65,7 +65,7 @@
                 </tr>
 
             {% endfor %}
-          </table> -->
+          </table> 
           </div>
         <!-- /.box-body -->
       </div>

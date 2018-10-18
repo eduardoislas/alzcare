@@ -80,7 +80,16 @@ def adult_list(request):
     return render(request, "principal/adult/adult_list.html")
     
 def getAdults_json(request):
-    serialized_obj = serializers.serialize('json', Adult.objects.all())
+    adultos = list(Adult.objects.all())
+    adultos_model = []
+    for ad in adultos:
+        adulto_model = adult_DTO()
+        adulto_model.name = ad.__str__() #ad.name + " "+ ad.lastName+ " "+ad.mLastName
+        adulto_model.phase = ad.phase
+        adultos_model.append(adulto_model)
+
+    serialized_obj = serializers.serialize('json', adultos)
+
     return JsonResponse(serialized_obj,safe=False)
 
 # Gestión de adultos

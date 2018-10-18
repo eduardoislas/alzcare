@@ -36,7 +36,7 @@ function getAdults() {
         url: '/getAdults_json',
         success: function (data) {
          var items= JSON.parse(data);
-          for (var i = 0; i < items.length; i++) {
+            for (var i = 0; i < items.length; i++) {
             adult_items.push(items[i].fields);
             }
             loadGridAdults();

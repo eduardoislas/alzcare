@@ -135,7 +135,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       {% endif %}
       {% if  request.user.is_staff %}    
                       <li>
-                          <a href="{% url 'adults_list' %}">
+                          <!-- <a href="{% url 'adults_list' %}"> -->
+                              <a href="{% url 'adult_list' %}">
                               <i class="fa fa-heartbeat"></i> <span>Gestión Adultos</span>
                               <span class="pull-right-container">
                                   <i class="fa fa-angle-left pull-right"></i>
