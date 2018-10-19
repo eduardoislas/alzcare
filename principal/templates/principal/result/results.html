@@ -1,33 +1,7 @@
 {% extends 'principal/layout.html' %}
 
 {% block title %}Resultados{% endblock %}
-
-{% block background %}{% endblock %}
 {% block scripts%} 
-<!--
-<script>
-
-var ctx = document.getElementById('myChart').getContext('2d');
-var chart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'bar',
-
-    // The data for our dataset
-    data: {
-        labels: [ {% for caregivers in caregivers %},'{{caregivers.name}}', {% endfor %}],
-        datasets: [{
-            label: "Resultados De Instrumentos",
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [{% for instrument in instrumentresults %},'{{instrument.score}}', {% endfor %}],
-        }]
-    },
-
-    // Configuration options go here
-    options: {}
-});
-
-</script> -->
 {% endblock %}
 
 {% block headers %}{% endblock %}
@@ -43,25 +17,18 @@ var chart = new Chart(ctx, {
         </div>
         <!-- /.box-header -->
         <div class="box-body no-padding">
-           <h4>Periodos de Aplicación: </h4>
+           <h4>Periodos de Valoración: </h4>
            <div class="form-group">
                  <select class="form-control" id="application" name="application">
                     {% for a in applications %}
-                        <option value={{ a.id }}>{{a}}</option>
+                        <option name="valoration" value={{ a.id }}>{{a}}</option>
                     {% endfor %}
                 </select>
             </div>
-            <h4>Cuidador: </h4>
-           <div class="form-group">
-                 <select class="form-control" id="caregiver" name="caregiver">
-                    {% for c in caregivers %}
-                        <option value={{ c.id }}>{{c}}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <form action="/resultsDetail/" method="POST">
+            <form action="/resultsList/" method="POST">
                     {% csrf_token %}
-                    <button class="btn btn-primary" type="submit" value="resultados">Ver resultados</button>
+                    <input type="hidden" name="valoration" value="1"/>
+                    <button class="btn btn-primary" type="submit" value="resultados">Ver Cuidadores</button>
                 </form>
         </div>
         <!-- /.box-body -->
@@ -70,7 +37,6 @@ var chart = new Chart(ctx, {
                 
     <a href="{% url "home" %}" class="btn btn-info">Regresar</a>
 </div>
-<!--<canvas id="myChart" width="400" height="400"></canvas>-->
 </div>
 
 

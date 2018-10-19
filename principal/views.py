@@ -72,6 +72,8 @@ def resultQuiz(request):
         score+= answer.option.value
     iresult.score=score
     iresult.percentage = (score*100)/instrument.maxValue
+    ##Para guardar la siguiente línea se requieren ciertas reglas de negocio (quedan pendientes)
+    iresult.range = "bajo"
     iresult.save()
     return JsonResponse({'success' : 'true',  'mensaje': 'Se guardó con éxito' },safe=False)
 
@@ -155,13 +157,18 @@ class ValorationCreate(CreateView):
 # Mostrar resultados al psicólogo
 def results (request):
     applications = InstrumentApplication.objects.all()
-    instrumentresults = InstrumentResult.objects.all()
+    return render(request,"principal/result/results.html",{"applications":applications}) 
+
+def resultsList(request):
+    app = InstrumentApplication.objects.get(pk=request.POST.get('valoration'))
     caregivers = Caregiver.objects.filter(status="A")
-    return render(request,"principal/result/results.html",{"applications":applications, "caregivers":caregivers,"instrumentresults":instrumentresults}) 
+    iResults = list(InstrumentResult.objects.filter(iapplication=app).select_related('caregiver'))
+    return render(request,"principal/result/results_list.html",{"iResults":iResults, "caregivers":caregivers, "app":app}) 
 
 def resultsDetail (request):
-    #Datos Hardcodeados - Debe recibir idCuidador y el idApplication
-    caregiver = Caregiver.objects.get(pk=1)
-    app = InstrumentApplication.objects.get(pk=1)
-    iResults = InstrumentResult.objects.filter(caregiver=1, iapplication=1)
+    idc = int(request.POST.get('caregiver'))
+    idv = int(request.POST.get('valoration'))
+    caregiver = Caregiver.objects.get(pk=idc)
+    app = InstrumentApplication.objects.get(pk=idv)
+    iResults = InstrumentResult.objects.filter(caregiver=idc, iapplication=idv)
     return render(request,"principal/result/results_detail.html",{"iResults":iResults, "caregiver":caregiver, "app":app}) 

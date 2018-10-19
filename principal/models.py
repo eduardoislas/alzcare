@@ -213,15 +213,16 @@ class Question(models.Model):
         return cadena.format(self.item, self.instrument.name, self.description)
 
 class InstrumentResult(models.Model):
-    instrument = models.ForeignKey(Instrument, null=False, blank = False , on_delete=models.CASCADE)
-    iapplication = models.ForeignKey(InstrumentApplication, null=False, blank = False , on_delete=models.CASCADE)
-    caregiver = models.ForeignKey(Caregiver, null= False, blank = False, on_delete=models.CASCADE)
-    score = models.SmallIntegerField()
+    instrument = models.ForeignKey(Instrument, null=False, blank = False , on_delete=models.CASCADE, verbose_name="Instrumento")
+    iapplication = models.ForeignKey(InstrumentApplication, null=False, blank = False , on_delete=models.CASCADE, verbose_name="Valoración")
+    caregiver = models.ForeignKey(Caregiver, null= False, blank = False, on_delete=models.CASCADE, verbose_name="Cuidador")
+    score = models.SmallIntegerField(verbose_name="Puntuación obtenida")
     STATUS_INS=(('A','Activo'),('C','Contestado'))
     status = models.CharField(max_length=1, choices= STATUS_INS, default='A')
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación")
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")
     percentage = models.DecimalField(max_digits=4, decimal_places=1, verbose_name="Porcentaje",null= True, blank = True)
+    range = models.CharField(max_length=50, null=True, blank=True, verbose_name="Rango de calificación estimado")
 
     class Meta:
         verbose_name = "Resultado de Instrumento"

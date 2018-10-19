@@ -10,11 +10,11 @@
 {% block content %}
 <div class="card-cv">
         <section class="content-header">
-                <h1>Resultados de la Valoración {{app.period}} del año {{app.year}}</h1>
+                <h1>Resultado de la Valoración {{app.period}} del año {{app.year}}</h1>
             </section>
     <div class="box">
         <div class="box-header">
-          <h3 class="box-title">Cuidador: {{caregiver}}</h3>
+          <h3 class="box-title">{{caregiver}}</h3>
         </div>
         <!-- /.box-header -->
         <div class="box-body no-padding">
@@ -23,7 +23,8 @@
               <th>Instrumento</th>
               <th>Puntuación</th>
               <th>Score obtenido</th>
-              <th>Detalle</th>
+              <th>Porcentaje</th>
+              <th>Riesgo</th>
             </tr>
             {% for ir in iResults %}
                 <h2></h2> 
@@ -31,12 +32,8 @@
                         <td>{{ir.instrument.name}}</td>
                         <td>{{ir.instrument.maxValue}}</td>
                         <td>{{ir.score}}</td>
-                        <td>
-                            <form action="#" method="POST">
-                              {% csrf_token %}
-                              <button class="btn btn-basic" type="submit" value="Contestar">Ver Detalle</button>
-                            </form>
-                        </td>
+                        <td>{{ir.percentage}}</td>
+                        <td>{{ir.range}}</td>
                 </tr>
 
             {% endfor %}
@@ -45,9 +42,13 @@
         <!-- /.box-body -->
       </div>
       <div class="pull-right">
-    <a href="{% url "home" %}" class="btn btn-info">Regresar</a>
-</div>
+    <a href="{% url "results" %}" class="btn btn-info">Regresar</a>
 
+</div>
+    <form action="#" method="POST">
+          {% csrf_token %}
+          <button class="btn btn-basic" type="submit" value="Contestar">Generar informe</button>
+    </form>
 </div>
 
 {% endblock %}

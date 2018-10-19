@@ -53,5 +53,6 @@ urlpatterns = [
 
   #Mostrar resultados
     path('results/', login_required(views.results), name="results"),
+    path('resultsList/', login_required(views.resultsList), name="resultsList"),
     path('resultsDetail/', login_required(views.resultsDetail), name="resultsDetail"),
 ]
