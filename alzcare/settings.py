@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'alzcare.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'alzcare_db',
+        'NAME': 'base_db',
         'USER': 'root',
         'PASSWORD': 'sesamo',
         'HOST': '127.0.0.1',

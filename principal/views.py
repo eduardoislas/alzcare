@@ -142,7 +142,7 @@ class CaregiverCreate(CreateView):
 class InterviewCreate(CreateView):
     model=Interview
     template_name="principal/caregiver/interview_create.html"
-    fields = ['q1','q2','q3','q4','q5']
+    fields = ['caregiver','q1','q2','q3','q4','q5','q6','q7','q8','q9','q10','q11','q12']
 
 # Gestión de Periodos de Valoración
 class ValorationListView(ListView):
